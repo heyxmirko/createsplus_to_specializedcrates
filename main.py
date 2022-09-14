@@ -1,20 +1,24 @@
-import json
-import string
-from puvodni_config import puvodni_config
+# 1. Replace example config in previous_config_in_json.py
+# 2. Run main.py¨
+# 3. Copy the output and convert it back to YAML here: https://www.json2yaml.com/
 
-puvodni = json.loads(puvodni_config)
-novy_list = []
-novy = ""
-for item in puvodni["Winnings"]:
+
+
+import json
+from previous_config_in_json import previous_config
+
+previous = json.loads(previous_config)
+new_list = []
+new = ""
+for item in previous["Winnings"]:
 
     print("#CONVERTING ITEM ID:", item)
-    path = puvodni["Winnings"][item]
+    path = previous["Winnings"][item]
 
     enchant = f"""{path["Enchantments"]}""".replace("-", ";")
 
-
     if path["Type"] == "COMMAND":
-        novy = """
+        new = """
             "%s": {
                 "commands": "%s",
                 "chance": %d,
@@ -45,7 +49,7 @@ for item in puvodni["Winnings"]:
 
 
     elif path["Type"] == "ITEM":
-        novy = """
+        new = """
             "%s": {
                 "chance": %d,
                 "rarity": "rare",
@@ -73,10 +77,10 @@ for item in puvodni["Winnings"]:
                       path["Lore"])
         
     print(path["Type"])
-    novy_list.append(novy)
+    new_list.append(new)
 
 
-for x in novy_list:
+for x in new_list:
     print(x)
 
 

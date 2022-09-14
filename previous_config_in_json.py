@@ -1,4 +1,6 @@
-puvodni_config = """{
+# To convert YAML to JSON use: https://www.json2yaml.com/
+
+previous_config = """{
   "Winnings": {
     "1": {
       "Type": "ITEM",
